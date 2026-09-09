@@ -289,7 +289,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .status-badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg-panel-raised); }
-.status-死亡 { color: var(--danger); }
+.status-ロスト, .status-死亡 { color: var(--danger); }
 
 /* ---- モーダル共通 ---- */
 .modal-overlay {
