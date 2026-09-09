@@ -65,14 +65,16 @@
   }
 
   // 探索者の丸いアイコン(立ち絵・画像があればそれを、無ければ名前の頭文字を表示する)。
-  // 一覧表・ランキングの表彰台など、複数の画面で使い回す。
+  // 一覧表・ランキングの表彰台など、複数の画面で使い回す。状態が「ロスト」なら
+  // 枠を赤くする(この一覧系の場所ではノイズ演出はかけない。ノイズは詳細画面のみ)。
   function thumbHtml(inv, className) {
     const cls = className || 'row-thumb';
+    const finalCls = inv.status === 'ロスト' ? `${cls} thumb-lost` : cls;
     if (inv.image) {
-      return `<img class="${cls}" src="${inv.image}" alt="">`;
+      return `<img class="${finalCls}" src="${inv.image}" alt="">`;
     }
     const initial = escapeHtml((inv.name || '?').slice(0, 1));
-    return `<div class="${cls} row-thumb-placeholder">${initial}</div>`;
+    return `<div class="${finalCls} row-thumb-placeholder">${initial}</div>`;
   }
 
   // 探索者の名前を表示するHTML。状態が「ロスト」の場合は、名前が壊れて

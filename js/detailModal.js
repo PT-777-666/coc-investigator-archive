@@ -251,7 +251,7 @@
       <div class="modal-body">
         <div class="detail-top-grid">
           <div class="detail-top-left">
-            ${inv.image ? `<img class="detail-image" src="${inv.image}" alt="">` : ''}
+            ${inv.image ? `<div class="detail-image-wrap${inv.status === 'ロスト' ? ' detail-image-wrap-lost' : ''}"><img class="detail-image" src="${inv.image}" alt=""></div>` : ''}
             <div class="detail-meta">
               <span>職業: ${Utils.escapeHtml(inv.occupation) || '-'}</span>
               <span>性別: ${Utils.escapeHtml(inv.gender) || '-'}</span>

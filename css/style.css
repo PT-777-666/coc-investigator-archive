@@ -276,6 +276,12 @@ button { font-family: inherit; cursor: pointer; }
   display: flex; align-items: center; justify-content: center;
   color: var(--accent); font-weight: 700;
 }
+/* ロストの探索者は、一覧・ランキングのアイコンの枠だけ赤くする(ノイズ演出は詳細画面のみ)。 */
+.row-thumb.thumb-lost, .podium-thumb.thumb-lost {
+  border-color: var(--danger);
+  box-shadow: 0 0 6px var(--danger-glow);
+}
+.row-thumb-placeholder.thumb-lost { color: var(--danger); }
 
 .status-badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg-panel-raised); white-space: nowrap; display: inline-block; }
 .status-ロスト, .status-死亡 { color: var(--danger); }
@@ -335,6 +341,34 @@ button { font-family: inherit; cursor: pointer; }
   object-fit: cover;
   border: 1px solid var(--accent);
   box-shadow: 0 0 14px var(--accent-glow);
+}
+/* ロストの探索者の立ち絵(詳細画面のみ): 枠を赤くした上で、砂嵐(ノイズ)を
+   赤く色付けして重ね、少しずつ位置をずらして「表示が乱れている」風に見せる。
+   ノイズ自体はSVGのfeTurbulenceで生成し、filter(sepia+hue-rotate)で赤く染める。 */
+.detail-image-wrap { position: relative; display: inline-block; line-height: 0; }
+.detail-image-wrap-lost .detail-image {
+  border-color: var(--danger);
+  box-shadow: 0 0 14px var(--danger-glow);
+}
+.detail-image-wrap-lost::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: var(--radius-md);
+  background-image:
+    linear-gradient(rgba(255, 30, 50, 0.6), rgba(255, 30, 50, 0.6)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: cover, 140% 140%;
+  background-blend-mode: color-burn;
+  mix-blend-mode: hard-light;
+  animation: lost-static-shift 0.5s steps(4) infinite;
+  pointer-events: none;
+}
+@keyframes lost-static-shift {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 40% 15%; }
+  50% { background-position: 70% 50%; }
+  75% { background-position: 15% 70%; }
+  100% { background-position: 0% 0%; }
 }
 .detail-meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--text-secondary); font-size: 13px; margin-bottom: 8px; }
 .detail-tags { margin-bottom: 4px; }
