@@ -177,7 +177,6 @@
 
           <h3>能力値</h3>
           <div class="stat-input-grid">${abilityInputsHtml(inv.abilities)}</div>
-          <h3>副次数値</h3>
           <div class="stat-input-grid">${derivedInputsHtml(inv.derived)}</div>
 
           <h3>技能</h3>

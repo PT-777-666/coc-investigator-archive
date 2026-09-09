@@ -309,6 +309,13 @@
     if (hpMatch) result.derived.HP = Number(hpMatch[1]);
     const mpMatch = abilitySection.match(/^MP\s+(-?\d+)/m);
     if (mpMatch) result.derived.MP = Number(mpMatch[1]);
+    // アイデア・幸運・知識は6版特有(能力値表に「IDE」「幸運」「知識」として並ぶ)。
+    const ideaMatch = abilitySection.match(/^IDE\s+(-?\d+)/m);
+    if (ideaMatch) result.derived['アイデア'] = Number(ideaMatch[1]);
+    const luckMatch = abilitySection.match(/^幸運\s+(-?\d+)/m);
+    if (luckMatch) result.derived['幸運'] = Number(luckMatch[1]);
+    const knowMatch = abilitySection.match(/^知識\s+(-?\d+)/m);
+    if (knowMatch) result.derived['知識'] = Number(knowMatch[1]);
     // 能力値表の中の「正気度」行(POW×5の初期値)ではなく、「正気度 56 / 79」という
     // 現在値/最大値の行を優先する(スラッシュの有無で区別する)。
     const sanMatch = text.match(/正気度\s+(\d+)\s*\/\s*(\d+)/);

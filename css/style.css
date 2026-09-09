@@ -303,7 +303,7 @@ button { font-family: inherit; cursor: pointer; }
 .modal-panel-wide { max-width: 720px; }
 .modal-panel-detail { max-width: 920px; }
 
-/* ---- 詳細画面の上段(画像・基本情報 / 能力値・副次数値)を横並びにする ---- */
+/* ---- 詳細画面の上段(画像・基本情報 / 能力値・HP等)を横並びにする ---- */
 .detail-top-grid {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -440,9 +440,9 @@ button { font-family: inherit; cursor: pointer; }
 /* 90超の技能は、成長/初期値の区別より優先して目立たせる。 */
 .skill-total-exceptional { color: var(--exceptional-color); text-shadow: 0 0 6px var(--exceptional-glow); }
 
-/* ---- ゲージ(HP/MP/SANの目安表示) ----
+/* ---- ゲージ(SANの目安表示) ----
    探索者データには「最大値」を持たせていないため、目安として一般的な上限
-   (HP/MPは20、SANは99)に対する割合でバーを描画する簡易的な表示。 */
+   (99)に対する割合でバーを描画する簡易的な表示。HP/MPは単なる数値表記。 */
 .gauge-group {
   background: var(--bg-panel-raised);
   border: 1px solid var(--border);
@@ -466,9 +466,13 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 5px;
   overflow: hidden;
 }
+/* SANの目安上限(99)の下位1/5(約20)を「不定領域」(発狂の危険域)とみなし、
+   トラックの背景をそこだけ変えて示す。現在値のバー(.gauge-fill)がこの上に
+   乗るため、SANがその範囲まで減っていない限りは隠れて見えない。 */
+.gauge-track-danger {
+  background: linear-gradient(to right, var(--danger) 0%, var(--danger) 20%, var(--bg-panel-raised) 20%, var(--bg-panel-raised) 100%);
+}
 .gauge-fill { height: 100%; border-radius: 5px 0 0 5px; }
-.gauge-fill-HP { background: var(--danger); box-shadow: 0 0 6px var(--danger-glow); }
-.gauge-fill-MP { background: var(--mp); box-shadow: 0 0 6px var(--mp-glow); }
 .gauge-fill-SAN { background: var(--san); box-shadow: 0 0 6px var(--san-glow); }
 .gauge-value { width: 32px; font-size: 11px; color: var(--text-secondary); text-align: right; flex-shrink: 0; }
 

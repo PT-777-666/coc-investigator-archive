@@ -21,17 +21,21 @@
     `).join('');
   }
 
-  // HP/MP/SANは「最大値」をデータとして持っていないため、目安の上限
-  // (HP/MPは20、SANは99)に対する割合でゲージを描く簡易的な表示。
-  const GAUGE_REFS = { HP: 20, MP: 20, SAN: 99 };
+  // SANは「最大値」をデータとして持っていないため、目安の上限(99)に対する
+  // 割合でゲージを描く簡易的な表示。HP/MPは単なる数値表記にしたため対象外。
+  const GAUGE_REFS = { SAN: 99 };
 
   function gaugeHtml(key, value) {
     const ref = GAUGE_REFS[key];
     const pct = value == null ? 0 : Math.max(0, Math.min(100, Math.round((value / ref) * 100)));
+    // SANが目安上限の1/5を下回る範囲は「不定領域」(発狂の危険域)として、
+    // トラックの背景色を変えて一目で分かるようにする(現在値がその範囲まで
+    // 減っていなければ、ゲージに隠れて見えない)。
+    const dangerClass = key === 'SAN' ? ' gauge-track-danger' : '';
     return `
       <div class="gauge-row">
         <span class="gauge-label">${key}</span>
-        <div class="gauge-track"><div class="gauge-fill gauge-fill-${key}" style="width:${pct}%"></div></div>
+        <div class="gauge-track${dangerClass}"><div class="gauge-fill gauge-fill-${key}" style="width:${pct}%"></div></div>
         <span class="gauge-value">${value ?? '-'}</span>
       </div>
     `;
@@ -260,7 +264,6 @@
           <div class="detail-top-right">
             <h3>能力値</h3>
             <div class="stat-grid">${abilityRow(inv)}</div>
-            <h3>副次数値</h3>
             ${derivedRow(inv)}
           </div>
         </div>

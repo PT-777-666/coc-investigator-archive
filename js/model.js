@@ -9,8 +9,9 @@
   const ABILITY_KEYS = ['STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU'];
 
   // 副次的な数値。build・move(ビルド・移動力)は7版特有で版によって要不要が分かれるため、
-  // 版を問わず共通するHP/MP/SAN/DBだけを固定項目にする(必要な版ではメモや技能欄で補える)。
-  const DERIVED_KEYS = ['HP', 'MP', 'SAN', 'DB'];
+  // 版を問わず共通するHP/MP/SAN/DBに加え、6版のアイデア・幸運・知識ロールを固定項目にする
+  // (7版ではこれらを使わないため、その場合は空欄のままでよい)。
+  const DERIVED_KEYS = ['HP', 'MP', 'SAN', 'DB', 'アイデア', '幸運', '知識'];
 
   // 状態のプルダウン候補(自由入力も可)。
   const STATUS_OPTIONS = ['生存', 'ロスト', 'その他'];
