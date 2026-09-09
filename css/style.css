@@ -595,6 +595,23 @@ button { font-family: inherit; cursor: pointer; }
 .iachara-success { color: var(--text-secondary); }
 .iachara-error { color: var(--danger); }
 
+/* ---- 能力値ランキング(遊び機能) ---- */
+.ranking-list { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.ranking-row:hover { border-color: var(--accent); }
+.ranking-rank { width: 40px; flex-shrink: 0; font-weight: 700; text-align: center; }
+.ranking-name { flex: 1; font-weight: 600; }
+.ranking-value { font-weight: 700; color: var(--accent); font-size: 16px; }
+
 @media (max-width: 640px) {
   .form-grid { grid-template-columns: 1fr; }
   .app-header { flex-direction: column; align-items: flex-start; gap: 10px; }

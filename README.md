@@ -16,6 +16,7 @@ Node.js等のビルドツールを使わない素のHTML/CSS/JavaScriptで作ら
 - PWA対応。Edge/Chromeでインストールすると、ブラウザのタブではなく独立したアプリのウィンドウとして
   起動できます
 - ダーク/ライトテーマの切り替え
+- 能力値ランキング(全能力値合計・各能力値ごとに、最高/最低順で一覧表示する遊び機能)
 
 ### 外部サービスからの取り込み・更新
 
@@ -91,7 +92,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\static-server.ps1
 ## 今後の予定(未実装)
 
 - CSV/Excel形式でのエクスポート
-- 能力値ランキング等の遊び機能
 
 ## ライセンス
 

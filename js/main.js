@@ -119,6 +119,9 @@
     document.getElementById('btn-add').addEventListener('click', () => {
       InvestigatorForm.open(null);
     });
+    document.getElementById('btn-ranking').addEventListener('click', () => {
+      RankingModal.open();
+    });
     document.getElementById('btn-export').addEventListener('click', () => {
       ImportExport.exportJson();
     });
@@ -172,6 +175,7 @@
 
   async function init() {
     DetailModal.mount();
+    RankingModal.mount();
     InvestigatorForm.mount();
     ListView.mount(document.getElementById('list-view'));
     SearchFilter.mount(document.getElementById('search-filter'));

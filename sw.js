@@ -3,7 +3,7 @@
  * 探索者データ自体はここでは扱わない(File System Access APIでローカルフォルダに
  * 直接保存されるため、Service Workerの範囲外)。
  */
-const CACHE_NAME = 'coc-investigator-archive-v49';
+const CACHE_NAME = 'coc-investigator-archive-v51';
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -18,6 +18,7 @@ const PRECACHE_URLS = [
   './js/listView.js',
   './js/searchFilter.js',
   './js/detailModal.js',
+  './js/rankingModal.js',
   './js/iacharaSync.js',
   './js/charaHokankoSync.js',
   './js/investigatorForm.js',

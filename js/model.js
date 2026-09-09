@@ -13,7 +13,7 @@
   const DERIVED_KEYS = ['HP', 'MP', 'SAN', 'DB'];
 
   // 状態のプルダウン候補(自由入力も可)。
-  const STATUS_OPTIONS = ['生存', 'ロスト', '引退', '凍結', 'その他'];
+  const STATUS_OPTIONS = ['生存', 'ロスト', 'その他'];
 
   // システム欄の入力補助候補(自由入力も可)。
   const SYSTEM_SUGGESTIONS = ['クトゥルフ神話TRPG 6版', 'クトゥルフ神話TRPG 7版', '新クトゥルフ神話TRPG'];
