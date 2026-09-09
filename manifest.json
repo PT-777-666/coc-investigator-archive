@@ -1,6 +1,6 @@
 {
-  "name": "探索者アーカイブ",
-  "short_name": "探索者アーカイブ",
+  "name": "探索者記録帳",
+  "short_name": "探索者記録帳",
   "description": "クトゥルフ神話TRPGの探索者データをローカルに保管する個人用ツール",
   "start_url": "./index.html",
   "scope": "./",

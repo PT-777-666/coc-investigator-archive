@@ -51,7 +51,7 @@
       }
       // 処理中であることが分かるよう、画面の右上に小さな案内を出す(完了時に消す)。
       var statusBanner = document.createElement('div');
-      statusBanner.textContent = '探索者アーカイブ: 取得中…';
+      statusBanner.textContent = '探索者記録帳: 取得中…';
       statusBanner.style.cssText = 'position:fixed;top:12px;right:12px;z-index:2147483647;' +
         'background:#1c1e26;color:#eceef2;padding:8px 14px;border-radius:6px;' +
         'font-family:sans-serif;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.3);';
@@ -159,8 +159,8 @@
       statusBanner.remove();
       var done = function () {
         alert(ccfoliaJson
-          ? 'キャラクター情報(能力値・技能を含む)をコピーしました。\\n「探索者アーカイブ」の貼り付け欄にペーストしてください。'
-          : 'キャラクター情報をコピーしました(能力値・技能は自動取得できませんでした。予備欄で手動貼り付けしてください)。\\n「探索者アーカイブ」の貼り付け欄にペーストしてください。');
+          ? 'キャラクター情報(能力値・技能を含む)をコピーしました。\\n「探索者記録帳」の貼り付け欄にペーストしてください。'
+          : 'キャラクター情報をコピーしました(能力値・技能は自動取得できませんでした。予備欄で手動貼り付けしてください)。\\n「探索者記録帳」の貼り付け欄にペーストしてください。');
       };
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done, function () { prompt('コピーができなかったので、下のテキストを手動でコピーしてください:', text); });
