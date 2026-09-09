@@ -42,22 +42,24 @@
       return;
     }
 
-    const replace = confirm(
+    // confirm()はOKでtrue・キャンセルでfalseを返すため、「キャンセル=全置換」という
+    // 説明文に合わせて否定形の変数名にしている(以前はここが反転しており、全置換の
+    // つもりでキャンセルを押すと黙ってマージされてしまうバグがあった)。
+    const wantsReplace = !confirm(
       `${imported.length}件の探索者を読み込みます。\n\n` +
       'OK: 既存データを残したまま追加/更新(同じIDは上書き)\n' +
       'キャンセル: 現在の登録データを全て置き換える\n\n' +
       '続行しますか？'
     );
 
-    if (replace) {
-      const doReplace = confirm('本当に現在の登録データを全て削除して置き換えますか？この操作は取り消せません。');
-      if (doReplace) {
-        await FileStore.clearInvestigators();
-        await FileStore.putInvestigators(imported);
-        Store.set({ investigators: imported, selectedTags: [] });
-        alert(`${imported.length}件の探索者で置き換えました。`);
-        return;
-      }
+    if (wantsReplace) {
+      const confirmed = confirm('本当に現在の登録データを全て削除して置き換えますか？この操作は取り消せません。');
+      if (!confirmed) return; // 全置換をやめた場合は、マージにフォールスルーせずインポート自体を中止する
+      await FileStore.clearInvestigators();
+      await FileStore.putInvestigators(imported);
+      Store.set({ investigators: imported, selectedTags: [] });
+      alert(`${imported.length}件の探索者で置き換えました。`);
+      return;
     }
 
     // マージ(追加/更新)

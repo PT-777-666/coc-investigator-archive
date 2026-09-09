@@ -1,7 +1,7 @@
 # start-app.ps1 - desktop-shortcut entry point.
 # Starts the local static server (if not already running) and opens the app in the default browser.
 param(
-  [int]$Port = 28740
+  [int]$Port = 38740
 )
 
 $ServerScript = Join-Path $PSScriptRoot 'static-server.ps1'
