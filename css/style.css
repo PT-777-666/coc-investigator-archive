@@ -1,0 +1,634 @@
+/* style.css — RPGのステータス画面をイメージした、ダーク+ネオン発光のテーマ。 */
+
+:root {
+  --bg: #0a0e1a;
+  --bg-panel: #0d1220;
+  --bg-panel-raised: #141b2e;
+  --border: #2a3f5a;
+  --text-primary: #eaf6ff;
+  --text-secondary: #9ab0c8;
+  --text-faint: #6a7d94;
+  --accent: #4ac8ff;
+  --accent-glow-faint: rgba(74, 200, 255, 0.12);
+  --accent-glow-soft: rgba(74, 200, 255, 0.25);
+  --accent-glow: rgba(74, 200, 255, 0.55);
+  --accent-text: #071018;
+  --danger: #ff5a6a;
+  --danger-soft: #3a1e22;
+  --danger-glow: rgba(255, 90, 106, 0.4);
+  --mp: #5ac8ff;
+  --mp-glow: rgba(90, 200, 255, 0.5);
+  --san: #c89aff;
+  --san-glow: rgba(200, 154, 255, 0.5);
+  --grown-color: #ffcf5c;
+  --grown-glow: rgba(255, 207, 92, 0.35);
+  --grown-val: #ffe8b0;
+  --exceptional-color: #ff5ce0;
+  --exceptional-glow: rgba(255, 92, 224, 0.45);
+  --exceptional-val: #ffb0f0;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+/* ---- ライトテーマ(data-theme="light"のときに切り替わる) ----
+   ネオン発光はライト背景だと滲んで見づらいため、光彩を弱めに、
+   アクセント色も彩度を保ちつつ少し落ち着いた色に変えている。 */
+:root[data-theme="light"] {
+  --bg: #f2f5fa;
+  --bg-panel: #ffffff;
+  --bg-panel-raised: #eef2f8;
+  --border: #c5d0e0;
+  --text-primary: #182234;
+  --text-secondary: #47566c;
+  --text-faint: #7c8ba0;
+  --accent: #1c7fc0;
+  --accent-glow-faint: rgba(28, 127, 192, 0.08);
+  --accent-glow-soft: rgba(28, 127, 192, 0.16);
+  --accent-glow: rgba(28, 127, 192, 0.30);
+  --accent-text: #ffffff;
+  --danger: #d23c4e;
+  --danger-soft: #fbe3e6;
+  --danger-glow: rgba(210, 60, 78, 0.25);
+  --mp: #2f8fd0;
+  --mp-glow: rgba(47, 143, 208, 0.3);
+  --san: #7a52c9;
+  --san-glow: rgba(122, 82, 201, 0.3);
+  --grown-color: #a86a06;
+  --grown-glow: rgba(168, 106, 6, 0.22);
+  --grown-val: #6e4700;
+  --exceptional-color: #b02593;
+  --exceptional-glow: rgba(176, 37, 147, 0.22);
+  --exceptional-val: #7a1a65;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px var(--accent-glow-soft);
+}
+
+h1, h2, h3 { margin: 0 0 8px; }
+h1 { text-shadow: 0 0 12px var(--accent-glow); letter-spacing: 0.5px; }
+h3 {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  box-shadow: 0 1px 0 var(--accent-glow-faint);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.header-actions button { white-space: nowrap; }
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+
+/* ---- ボタン共通 ---- */
+button { font-family: inherit; cursor: pointer; }
+
+.btn-primary, .btn-secondary, .btn-danger {
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+.btn-primary:hover { box-shadow: 0 0 16px var(--accent-glow); }
+
+.btn-secondary {
+  background: var(--bg-panel-raised);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+.btn-secondary:hover { border-color: var(--accent); box-shadow: 0 0 8px var(--accent-glow-soft); }
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 8px var(--danger-glow);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 15px;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+}
+.btn-icon:hover { background: var(--bg-panel-raised); color: var(--text-primary); }
+.btn-icon-danger:hover { color: var(--danger); }
+
+/* ---- 検索・絞り込みバー ---- */
+.search-filter { margin-bottom: 12px; }
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.search-input, .filter-select {
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 14px;
+}
+.search-input { flex: 1 1 240px; min-width: 200px; }
+
+.tag-bar { min-height: 0; }
+.tag-chip, .tag-chip-sm {
+  display: inline-block;
+  background: var(--bg-panel-raised);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  margin: 0 4px 4px 0;
+}
+.tag-chip { cursor: pointer; }
+.tag-chip-active {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.stats-bar { color: var(--text-faint); font-size: 13px; margin: 4px 0 12px; }
+
+/* ---- 保存先フォルダの選択画面 ---- */
+.folder-setup {
+  display: flex;
+  justify-content: center;
+  padding: 60px 16px;
+}
+.folder-setup-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 0 24px var(--accent-glow-faint);
+}
+.folder-setup-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+.folder-setup-card .btn-secondary { margin-left: 8px; }
+
+.folder-indicator { color: var(--text-faint); font-size: 12px; margin-right: 4px; align-self: center; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  text-decoration: underline;
+  padding: 0;
+}
+.hint-small { margin-top: 10px; }
+
+/* ---- 空の状態 ---- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.hint { color: var(--text-faint); padding: 24px 0; text-align: center; }
+
+/* ---- 一覧テーブル ---- */
+.list-view { overflow-x: auto; }
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.inv-table th, .inv-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.inv-table th {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.inv-row { cursor: pointer; }
+.inv-row:hover { background: var(--bg-panel-raised); }
+.col-name { font-weight: 600; }
+.col-actions { white-space: nowrap; }
+.col-date { color: var(--text-faint); font-size: 12px; white-space: nowrap; }
+.col-color { width: 14px; padding-right: 0 !important; }
+
+/* いあきゃら等から取り込んだ「イメージカラー」を示す色見本。 */
+.color-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+.color-dot-lg { width: 14px; height: 14px; margin-right: 6px; }
+
+.row-thumb {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, var(--bg-panel-raised), var(--bg-panel));
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+.row-thumb-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-weight: 700;
+}
+
+.status-badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg-panel-raised); }
+.status-死亡 { color: var(--danger); }
+
+/* ---- モーダル共通 ---- */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: flex-start; justify-content: center;
+  padding: 40px 16px;
+  overflow-y: auto;
+  z-index: 100;
+}
+/* [hidden]属性はCSSの他ルールとdisplayの詳細度が同点だと負けることがあるため、
+   表示時だけ明示的にdisplay:flexにする(非表示はブラウザ標準の[hidden]に任せる) */
+.modal-overlay:not([hidden]) { display: flex; }
+.modal-panel {
+  background: var(--bg-panel);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 24px var(--accent-glow-faint), 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+.modal-panel-wide { max-width: 720px; }
+.modal-panel-detail { max-width: 920px; }
+
+/* ---- 詳細画面の上段(画像・基本情報 / 能力値・副次数値)を横並びにする ---- */
+.detail-top-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .detail-top-grid { grid-template-columns: 1fr; }
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-body { padding: 16px 20px; }
+.modal-footer {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.detail-image {
+  max-width: 200px; max-height: 200px;
+  border-radius: var(--radius-md);
+  display: block;
+  margin-bottom: 12px;
+  object-fit: cover;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+.detail-meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--text-secondary); font-size: 13px; margin-bottom: 8px; }
+.detail-tags { margin-bottom: 4px; }
+.detail-memo { white-space: pre-wrap; color: var(--text-secondary); font-size: 14px; }
+.note-item {
+  background: var(--bg-panel-raised);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+.note-item-title { margin: 0 0 4px; font-weight: 600; font-size: 13px; }
+.note-item-text { margin: 0; white-space: pre-wrap; color: var(--text-secondary); font-size: 14px; }
+.notes-group { margin-bottom: 10px; }
+.notes-group summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--accent);
+  padding: 6px 2px;
+}
+.notes-group[open] summary { margin-bottom: 6px; }
+.notes-group .note-item { margin-left: 4px; }
+.detail-source { font-size: 13px; }
+.detail-source a { color: var(--accent); }
+.detail-dates { color: var(--text-faint); font-size: 12px; margin-top: 12px; }
+
+.stat-grid, .stat-input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+.stat-cell {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  display: flex; flex-direction: column;
+}
+.stat-cell .stat-key {
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.stat-cell .stat-val { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+
+/* ---- 技能表(初期/職業/興味/成長/他/合計を列で並べる) ---- */
+.skill-filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 0 10px;
+  cursor: pointer;
+  width: fit-content;
+}
+/* 技能数が多いキャラクターは表を複数列に分けて横に並べ、縦に間延びしないようにする。 */
+.skill-table-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.skill-group-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.skill-table-wrap { overflow-x: auto; }
+.skill-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: 13px;
+}
+.skill-table th, .skill-table td {
+  padding: 5px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.skill-table th {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.skill-table tbody tr:last-child td { border-bottom: none; }
+.skill-name-cell { text-align: left; font-weight: 600; color: var(--text-primary); }
+.skill-total { font-weight: 700; }
+
+/* 技能の色分け: 初期値のまま(地味)か、成長させた(強調)か。初期値が分からない
+   技能(ここふぉりあ駒出力や手入力など)はskill-totalのまま区別しない。 */
+.skill-total-initial { color: var(--text-faint); }
+.skill-total-grown { color: var(--grown-color); text-shadow: 0 0 6px var(--grown-glow); }
+/* 90超の技能は、成長/初期値の区別より優先して目立たせる。 */
+.skill-total-exceptional { color: var(--exceptional-color); text-shadow: 0 0 6px var(--exceptional-glow); }
+
+/* ---- ゲージ(HP/MP/SANの目安表示) ----
+   探索者データには「最大値」を持たせていないため、目安として一般的な上限
+   (HP/MPは20、SANは99)に対する割合でバーを描画する簡易的な表示。 */
+.gauge-group {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+.gauge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.gauge-row:last-child { margin-bottom: 0; }
+.gauge-label {
+  width: 34px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.gauge-track {
+  flex: 1;
+  height: 9px;
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.gauge-fill { height: 100%; border-radius: 5px 0 0 5px; }
+.gauge-fill-HP { background: var(--danger); box-shadow: 0 0 6px var(--danger-glow); }
+.gauge-fill-MP { background: var(--mp); box-shadow: 0 0 6px var(--mp-glow); }
+.gauge-fill-SAN { background: var(--san); box-shadow: 0 0 6px var(--san-glow); }
+.gauge-value { width: 32px; font-size: 11px; color: var(--text-secondary); text-align: right; flex-shrink: 0; }
+
+.stat-input { display: flex; flex-direction: column; font-size: 12px; color: var(--text-faint); gap: 4px; }
+.stat-input input {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  width: 100%;
+}
+
+/* ---- フォーム ---- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  margin-bottom: 8px;
+}
+.form-span-2 { grid-column: 1 / -1; }
+#inv-form label { display: flex; flex-direction: column; font-size: 12px; color: var(--text-faint); gap: 4px; }
+#inv-form input, #inv-form select, #inv-form textarea {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 7px 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+#inv-form textarea { width: 100%; resize: vertical; }
+
+.skill-row { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+.skill-row .skill-name { flex: 2; }
+.skill-row .skill-value { flex: 1; }
+.skill-row input {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+}
+
+.note-row {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  margin-bottom: 8px;
+}
+.note-row-header { display: flex; gap: 8px; margin-bottom: 6px; }
+.note-row-header .note-title { flex: 1; }
+.note-row input, .note-row textarea {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  width: 100%;
+  font-family: inherit;
+}
+.note-row textarea { resize: vertical; }
+
+#image-preview-wrap { margin: 4px 0 8px; }
+
+/* ---- いあきゃら取り込み ---- */
+.import-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: start;
+}
+.iachara-import {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+.import-columns .iachara-import { margin-bottom: 0; }
+.iachara-import summary { cursor: pointer; font-size: 13px; color: var(--text-secondary); }
+.iachara-import-body { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.iachara-import-body .hint-small { font-size: 12px; color: var(--text-faint); line-height: 1.6; margin: 0; }
+.iachara-import-body .iachara-step-title {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.iachara-import-body .iachara-step-title:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.iachara-fallback {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.iachara-fallback summary { cursor: pointer; font-size: 12px; color: var(--text-faint); }
+.iachara-fallback > * + * { margin-top: 8px; }
+.iachara-import-body textarea {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/* ファイルのドラッグ&ドロップ受け皿。ドラッグ中は枠を光らせて分かりやすくする。 */
+.dropzone {
+  border-radius: var(--radius-sm);
+  transition: box-shadow 0.15s ease;
+}
+.dropzone textarea { width: 100%; display: block; }
+.dropzone-active {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px var(--accent-glow);
+}
+.dropzone-active textarea { border-color: var(--accent) !important; }
+.bookmarklet-link {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  cursor: grab;
+}
+.iachara-preview { font-size: 12px; }
+.iachara-success { color: var(--text-secondary); }
+.iachara-error { color: var(--danger); }
+.iachara-raw summary { cursor: pointer; color: var(--text-faint); }
+.iachara-raw pre {
+  white-space: pre-wrap;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .app-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .import-columns { grid-template-columns: 1fr; }
+}

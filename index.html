@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>探索者アーカイブ</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#0a0e1a">
+<script src="js/theme.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>探索者アーカイブ</h1>
+    <div class="header-actions">
+      <span id="folder-indicator" class="folder-indicator"></span>
+      <button type="button" id="btn-add" class="btn-primary">＋ 新規探索者</button>
+      <button type="button" id="btn-export" class="btn-secondary">JSONエクスポート</button>
+      <button type="button" id="btn-import" class="btn-secondary">JSONインポート</button>
+      <button type="button" id="btn-change-folder" class="btn-secondary">保存先を変更</button>
+      <button type="button" id="btn-theme-toggle" class="btn-icon" title="ライト/ダーク切り替え"></button>
+      <input type="file" id="import-file-input" accept="application/json" hidden>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="folder-setup" class="folder-setup" hidden></div>
+
+    <div id="app-body" hidden>
+      <div id="search-filter" class="search-filter"></div>
+      <p id="stats-bar" class="stats-bar"></p>
+      <div id="empty-state" class="empty-state" hidden>
+        <p>まだ探索者が登録されていません。</p>
+        <button type="button" class="btn-primary" id="empty-add-btn">最初の探索者を登録する</button>
+        <p class="hint-small"><button type="button" class="link-btn" id="empty-sample-btn">サンプルデータで試す</button></p>
+      </div>
+      <div id="list-view" class="list-view"></div>
+    </div>
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/fileStore.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/sampleData.js"></script>
+  <script src="js/listView.js"></script>
+  <script src="js/searchFilter.js"></script>
+  <script src="js/detailModal.js"></script>
+  <script src="js/iacharaSync.js"></script>
+  <script src="js/charaHokankoSync.js"></script>
+  <script src="js/investigatorForm.js"></script>
+  <script src="js/importExport.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/registerSW.js"></script>
+</body>
+</html>
