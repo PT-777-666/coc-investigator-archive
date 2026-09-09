@@ -643,6 +643,35 @@ button { font-family: inherit; cursor: pointer; }
 .rank-2 .podium-step { height: 56px; background: linear-gradient(180deg, #eef1f5, #b9c3cf); }
 .rank-3 .podium-step { height: 38px; background: linear-gradient(180deg, #f0b489, #cf8348); }
 
+/* ---- ロストキャラの名前を「表示エラー」風に見せる演出 ----
+   本体の文字はそのままに、赤/シアンにずらした2枚の複製(::before/::after)を
+   時々ノイズのようにチラつかせる、古典的なグリッチテキストの手法。
+   steps(1)にすることで、なめらかに補間せずパッと切り替わるようにしている。 */
+.glitch-text { position: relative; display: inline-block; }
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glitch-text::before { color: var(--danger); animation: glitch-shift-1 3.2s infinite steps(1); }
+.glitch-text::after { color: var(--accent); opacity: 0.85; animation: glitch-shift-2 3.2s infinite steps(1); }
+@keyframes glitch-shift-1 {
+  0%, 92%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+  93% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 0); }
+  94% { clip-path: inset(60% 0 5% 0); transform: translate(2px, 0); }
+  95% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+}
+@keyframes glitch-shift-2 {
+  0%, 91%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+  92% { clip-path: inset(40% 0 20% 0); transform: translate(2px, 0); }
+  93% { clip-path: inset(5% 0 70% 0); transform: translate(-2px, 0); }
+  94% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+}
+
 @media (max-width: 640px) {
   .form-grid { grid-template-columns: 1fr; }
   .app-header { flex-direction: column; align-items: flex-start; gap: 10px; }

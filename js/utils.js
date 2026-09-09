@@ -75,5 +75,14 @@
     return `<div class="${cls} row-thumb-placeholder">${initial}</div>`;
   }
 
-  global.Utils = { uuid, debounce, escapeHtml, readFileAsDataUrl, downloadJson, formatDateTime, thumbHtml };
+  // 探索者の名前を表示するHTML。状態が「ロスト」の場合は、名前が壊れて
+  // 表示されているような「表示エラー」風の演出(グリッチ)を付ける。
+  // data-text属性に同じ文字列を入れておき、CSS側の疑似要素でRGBずれを描く。
+  function investigatorNameHtml(inv) {
+    const name = escapeHtml(inv.name) || '(名前未設定)';
+    if (inv.status !== 'ロスト') return name;
+    return `<span class="glitch-text" data-text="${name}">${name}</span>`;
+  }
+
+  global.Utils = { uuid, debounce, escapeHtml, readFileAsDataUrl, downloadJson, formatDateTime, thumbHtml, investigatorNameHtml };
 })(window);

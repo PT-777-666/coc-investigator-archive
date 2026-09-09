@@ -28,7 +28,7 @@
     const rows = list.map((inv) => `
       <tr class="inv-row" data-id="${inv.id}">
         <td>${Utils.thumbHtml(inv)}</td>
-        <td class="col-name">${Utils.escapeHtml(inv.name) || '(名前未設定)'}</td>
+        <td class="col-name">${Utils.investigatorNameHtml(inv)}</td>
         <td>${Utils.escapeHtml(inv.occupation)}</td>
         <td>${Utils.escapeHtml(inv.system)}</td>
         <td><span class="status-badge status-${Utils.escapeHtml(inv.status)}">${Utils.escapeHtml(inv.status)}</span></td>
