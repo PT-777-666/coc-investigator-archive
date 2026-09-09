@@ -262,17 +262,6 @@ button { font-family: inherit; cursor: pointer; }
 .col-name { font-weight: 600; }
 .col-actions { white-space: nowrap; }
 .col-date { color: var(--text-faint); font-size: 12px; white-space: nowrap; }
-.col-color { width: 14px; padding-right: 0 !important; }
-
-/* いあきゃら等から取り込んだ「イメージカラー」を示す色見本。 */
-.color-dot {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  vertical-align: middle;
-}
-.color-dot-lg { width: 14px; height: 14px; margin-right: 6px; }
 
 .row-thumb {
   width: 36px; height: 36px;

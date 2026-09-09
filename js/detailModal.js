@@ -238,7 +238,7 @@
     const panel = modalEl.querySelector('#detail-panel');
     panel.innerHTML = `
       <div class="modal-header">
-        <h2>${inv.color ? `<span class="color-dot color-dot-lg" style="background:${Utils.escapeHtml(inv.color)}" title="イメージカラー: ${Utils.escapeHtml(inv.color)}"></span>` : ''}${Utils.escapeHtml(inv.name) || '(名前未設定)'}</h2>
+        <h2>${Utils.escapeHtml(inv.name) || '(名前未設定)'}</h2>
         <button type="button" class="btn-icon" id="detail-close">✕</button>
       </div>
       <div class="modal-body">

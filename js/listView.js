@@ -35,7 +35,6 @@
 
     const rows = list.map((inv) => `
       <tr class="inv-row" data-id="${inv.id}">
-        <td class="col-color">${inv.color ? `<span class="color-dot" style="background:${Utils.escapeHtml(inv.color)}" title="イメージカラー: ${Utils.escapeHtml(inv.color)}"></span>` : ''}</td>
         <td>${thumbHtml(inv)}</td>
         <td class="col-name">${Utils.escapeHtml(inv.name) || '(名前未設定)'}</td>
         <td>${Utils.escapeHtml(inv.occupation)}</td>
@@ -54,7 +53,7 @@
       <table class="inv-table">
         <thead>
           <tr>
-            <th></th><th></th><th>名前</th><th>職業</th><th>システム</th><th>状態</th><th>タグ</th><th>更新日</th><th></th>
+            <th></th><th>名前</th><th>職業</th><th>システム</th><th>状態</th><th>タグ</th><th>更新日</th><th></th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>

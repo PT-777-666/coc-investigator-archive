@@ -31,7 +31,6 @@
       status: '生存',
       tags: [],
       image: '',
-      color: '',
       abilities: Object.fromEntries(ABILITY_KEYS.map((k) => [k, null])),
       derived: Object.fromEntries(DERIVED_KEYS.map((k) => [k, null])),
       skills: [],
@@ -41,24 +40,6 @@
       createdAt: now,
       updatedAt: now
     };
-  }
-
-  // いあきゃらの「イメージカラー」は、ブックマークレットでは色見本divのbackground-color
-  // (rgb(r, g, b)形式)として、テキスト出力では自由記述メモ内の「#rrggbb」として
-  // それぞれ渡ってくるため、どちらも「#rrggbb」に正規化する。判定できなければ空文字。
-  function normalizeColor(v) {
-    if (!v) return '';
-    const s = String(v).trim();
-    const hexMatch = s.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
-    if (hexMatch) {
-      const hex = hexMatch[1];
-      return '#' + (hex.length === 3 ? hex.split('').map((c) => c + c).join('') : hex).toLowerCase();
-    }
-    const rgbMatch = s.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
-    if (rgbMatch) {
-      return '#' + rgbMatch.slice(1, 4).map((n) => Math.max(0, Math.min(255, Number(n))).toString(16).padStart(2, '0')).join('');
-    }
-    return '';
   }
 
   // 数値化できる場合だけ数値にし、できなければnullにする(空欄・非数値の入力に強くする)。
@@ -127,7 +108,6 @@
       status: String(raw.status || '生存').trim(),
       tags,
       image: raw.image || '',
-      color: normalizeColor(raw.color),
       abilities,
       derived,
       skills,
@@ -190,7 +170,6 @@
     createEmptyInvestigator,
     normalizeInvestigator,
     abilityTotal,
-    baseSkillValue,
-    normalizeColor
+    baseSkillValue
   };
 })(window);

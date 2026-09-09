@@ -21,7 +21,7 @@ Node.js等のビルドツールを使わない素のHTML/CSS/JavaScriptで作ら
 
 - **いあきゃら**([iachara.com](https://iachara.com))の「出力→ファイルに出力」で保存した
   テキストを貼り付け(またはドラッグ&ドロップ)するだけで、基本情報・能力値・技能の内訳・
-  呪文/遭遇した超自然の存在/通過したシナリオ・メモ・イメージカラーまでまとめて取り込めます(推奨方式)。
+  呪文/遭遇した超自然の存在/通過したシナリオ・メモまでまとめて取り込めます(推奨方式)。
   素早く更新したいときのために、ブックマークレット+「ここふぉりあ駒出力」による簡易取り込みも
   用意しています
 - **キャラクター保管所**([charasheet.vampire-blood.net](https://charasheet.vampire-blood.net))の
@@ -63,7 +63,7 @@ Chromium系ブラウザ専用の機能を使っているため、Firefox等で�
 powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\static-server.ps1
 ```
 
-起動したら `http://localhost:38740/` をEdgeかChromeで開いてください。
+起動したら `http://localhost:48740/` をEdgeかChromeで開いてください。
 `tools\start-app.ps1` をダブルクリックすると、サーバー起動とブラウザでの表示を一度に行えます。
 `tools\create-desktop-shortcut.ps1` を実行すると、この`start-app.ps1`を呼ぶデスクトップ
 ショートカットを作成できます(以後はそのショートカットをダブルクリックするだけで起動できます)。

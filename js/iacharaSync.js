@@ -287,12 +287,6 @@
     const imgMatch = text.match(/(https:\/\/image\.iaproject\.app\/\S+)/);
     if (imgMatch) result.image = imgMatch[1];
 
-    // 「イメージカラー」は【基本情報】の正式な項目には無く、【メモ】に貼られがちな
-    // プロフィールテンプレート内(例:「●イメカラ：#ff9500」)にしか現れないため、
-    // 確実ではないがベストエフォートでテキスト全体から探す。
-    const colorMatch = text.match(/(?:イメ(?:ージ)?カラ|テーマカラ)ー?[^\n#]*(#[0-9a-fA-F]{3,6})/);
-    if (colorMatch) result.color = Model.normalizeColor(colorMatch[1]);
-
     const noteLines = [];
     ['身長', '体重', '出身', '髪の色', '瞳の色'].forEach((label) => {
       const v = field(label);
@@ -382,13 +376,7 @@
     result.age = findFieldValue(fields, ['年齢']);
     result.gender = findFieldValue(fields, ['性別']);
 
-    // 「イメージカラー」はいあきゃらの画面上では色見本(background-color)として
-    // 表示されており、ブックマークレット側でswatch.style.backgroundColorとして
-    // 取得済み(rgb(r, g, b)形式)。ここで#rrggbbに正規化して構造化フィールドにする。
-    const colorLabel = Object.keys(fields).find((label) => /(?:イメ(?:ージ)?カラ|テーマカラ)ー?/.test(label));
-    if (colorLabel) result.color = Model.normalizeColor(fields[colorLabel]);
-
-    const knownLabels = ['職業', '年齢', '性別', colorLabel].filter(Boolean);
+    const knownLabels = ['職業', '年齢', '性別'];
     const extraLines = Object.keys(fields)
       .filter((label) => !knownLabels.includes(label) && fields[label])
       .map((label) => `${label}: ${fields[label]}`);

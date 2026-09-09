@@ -210,8 +210,6 @@
 
     const imageInput = panel.querySelector('#image-input');
     let pendingImage = inv.image || '';
-    // イメージカラーはいあきゃらからの自動取り込み専用(手動入力欄は無い)。
-    let pendingColor = inv.color || '';
     imageInput.addEventListener('change', async () => {
       const file = imageInput.files[0];
       if (!file) return;
@@ -228,11 +226,6 @@
       if (!imageUrl) return;
       pendingImage = imageUrl;
       panel.querySelector('#image-preview-wrap').innerHTML = `<img id="image-preview" class="detail-image" src="${pendingImage}" alt="">`;
-    };
-    const applyColor = (color) => {
-      if (!color) return '';
-      pendingColor = color;
-      return ` イメージカラー(<span class="color-dot" style="background:${Utils.escapeHtml(color)}"></span>${Utils.escapeHtml(color)})も反映しました。`;
     };
     // システムは推測でしかないので、まだ未入力の場合だけ参考値として埋める(誤って上書きしない)。
     const applySystemGuess = (guess) => {
@@ -286,7 +279,6 @@
       setFieldValue('gender', parsed.gender);
       setFieldValue('age', parsed.age);
       applyImage(parsed.image);
-      const colorNote = applyColor(parsed.color);
       applySystemGuess(parsed.systemGuess);
 
       Object.entries(parsed.abilities || {}).forEach(([k, v]) => {
@@ -303,7 +295,7 @@
       mergeNotes(parsed.notes);
 
       const systemNote = parsed.systemGuess ? `(システムを「${parsed.systemGuess}」と読み取りました)` : '';
-      previewEl.innerHTML = `<p class="iachara-success">基本情報・能力値を反映し、技能${parsed.skills.length}件・メモ${parsed.notes.length}件を追加しました。値が正しいか確認してください。${Utils.escapeHtml(systemNote)}${colorNote}</p>`;
+      previewEl.innerHTML = `<p class="iachara-success">基本情報・能力値を反映し、技能${parsed.skills.length}件・メモ${parsed.notes.length}件を追加しました。値が正しいか確認してください。${Utils.escapeHtml(systemNote)}</p>`;
     };
 
     panel.querySelector('#iachara-text-apply-btn').addEventListener('click', () => {
@@ -418,7 +410,6 @@
       setFieldValue('age', parsed.age);
       setFieldValue('sourceUrl', parsed.sourceUrl);
       applyImage(parsed.image);
-      const colorNote = applyColor(parsed.color);
 
       if (parsed.extraInfo) {
         mergeNotes([{ title: 'いあきゃら基本情報', text: parsed.extraInfo }]);
@@ -436,9 +427,9 @@
         });
         mergeSkills(parsed.skills);
         const systemNote = parsed.systemGuess ? `(システムを「${parsed.systemGuess}」と推測して入力しました。違う場合は直してください)` : '';
-        previewEl.innerHTML = `<p class="iachara-success">職業・性別などに加え、能力値・技能${parsed.skills.length}件も自動で反映しました。${Utils.escapeHtml(systemNote)}${colorNote}</p>`;
+        previewEl.innerHTML = `<p class="iachara-success">職業・性別などに加え、能力値・技能${parsed.skills.length}件も自動で反映しました。${Utils.escapeHtml(systemNote)}</p>`;
       } else {
-        previewEl.innerHTML = `<p class="iachara-success">職業・性別・年齢などを反映しました。能力値・技能の自動取得はできなかったので、下の「手動」欄をお試しください。${colorNote}</p>`;
+        previewEl.innerHTML = '<p class="iachara-success">職業・性別・年齢などを反映しました。能力値・技能の自動取得はできなかったので、下の「手動」欄をお試しください。</p>';
         panel.querySelector('#iachara-fallback').open = true;
       }
     });
@@ -468,7 +459,6 @@
         status: formData.get('status'),
         tags: String(formData.get('tags') || '').split(',').map((t) => t.trim()).filter(Boolean),
         image: pendingImage,
-        color: pendingColor,
         abilities: Object.fromEntries(Model.ABILITY_KEYS.map((k) => [k, panel.querySelector(`[data-ability="${k}"]`).value])),
         derived: Object.fromEntries(Model.DERIVED_KEYS.map((k) => [k, panel.querySelector(`[data-derived="${k}"]`).value])),
         skills: skillRows,
