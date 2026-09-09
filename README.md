@@ -43,7 +43,18 @@ Node.js等のビルドツールを使わない素のHTML/CSS/JavaScriptで作ら
 **Microsoft Edge または Google Chrome**が必要です(データ保存にFile System Access APIという
 Chromium系ブラウザ専用の機能を使っているため、Firefox等では動作しません)。
 
-## ローカルでの起動方法
+## すぐに使う(インストール不要)
+
+以下のURLをEdgeかChromeで開くだけで使えます。PowerShellの操作は不要です。
+
+**https://pt-777-666.github.io/coc-investigator-archive/**
+
+初回だけデータの保存先フォルダを選ぶ必要があります(OneDriveなどの同期フォルダもOK)。
+以後はこのURLを開くたびに、選んだフォルダのデータがそのまま読み込まれます。
+気に入ったら、上記URLを開いた状態でアドレスバーの「インストール」アイコンから
+アプリとしてインストールもできます(任意)。
+
+## ローカルでの起動方法(開発・改造する場合)
 
 `index.html` を直接ダブルクリックすると正しく動作しないため、同梱のPowerShellサーバーを
 経由して開いてください。
