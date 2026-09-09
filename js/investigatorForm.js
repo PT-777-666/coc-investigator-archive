@@ -90,7 +90,10 @@
     panel.innerHTML = `
       <div class="modal-header">
         <h2>${editingId ? '探索者を編集' : '探索者を新規登録'}</h2>
-        <button type="button" class="btn-icon" id="form-close">✕</button>
+        <div class="modal-header-actions">
+          <button type="submit" form="inv-form" class="btn-primary">保存</button>
+          <button type="button" class="btn-icon" id="form-close">✕</button>
+        </div>
       </div>
       <div class="modal-body">
         <div class="import-columns">

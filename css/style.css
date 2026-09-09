@@ -277,7 +277,7 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--accent); font-weight: 700;
 }
 
-.status-badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg-panel-raised); }
+.status-badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg-panel-raised); white-space: nowrap; display: inline-block; }
 .status-ロスト, .status-死亡 { color: var(--danger); }
 
 /* ---- モーダル共通 ---- */
@@ -318,6 +318,8 @@ button { font-family: inherit; cursor: pointer; }
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
 }
+.modal-header h2 { min-width: 0; overflow-wrap: break-word; }
+.modal-header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .modal-body { padding: 16px 20px; }
 .modal-footer {
   display: flex; justify-content: flex-end; gap: 8px;

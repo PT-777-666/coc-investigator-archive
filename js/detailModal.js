@@ -239,7 +239,10 @@
     panel.innerHTML = `
       <div class="modal-header">
         <h2>${Utils.escapeHtml(inv.name) || '(名前未設定)'}</h2>
-        <button type="button" class="btn-icon" id="detail-close">✕</button>
+        <div class="modal-header-actions">
+          <button type="button" class="btn-secondary" id="detail-edit-top">編集</button>
+          <button type="button" class="btn-icon" id="detail-close">✕</button>
+        </div>
       </div>
       <div class="modal-body">
         <div class="detail-top-grid">
@@ -282,10 +285,12 @@
       });
     }
     panel.querySelector('#detail-close').addEventListener('click', close);
-    panel.querySelector('#detail-edit').addEventListener('click', () => {
+    const openEditForm = () => {
       close();
       InvestigatorForm.open(inv);
-    });
+    };
+    panel.querySelector('#detail-edit-top').addEventListener('click', openEditForm);
+    panel.querySelector('#detail-edit').addEventListener('click', openEditForm);
     panel.querySelector('#detail-delete').addEventListener('click', async () => {
       close();
       await MainActions.deleteInvestigator(inv.id);
