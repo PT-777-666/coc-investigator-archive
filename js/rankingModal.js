@@ -69,6 +69,7 @@
       return `
         <div class="podium-spot rank-${rank}" data-id="${row.inv.id}">
           <div class="podium-crown">👑</div>
+          ${Utils.thumbHtml(row.inv, 'row-thumb podium-thumb')}
           <div class="podium-label">
             <div class="podium-name">${Utils.escapeHtml(row.inv.name) || '(名前未設定)'}</div>
             <div class="podium-value">${row.value}</div>

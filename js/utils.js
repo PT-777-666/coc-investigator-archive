@@ -64,5 +64,16 @@
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
-  global.Utils = { uuid, debounce, escapeHtml, readFileAsDataUrl, downloadJson, formatDateTime };
+  // 探索者の丸いアイコン(立ち絵・画像があればそれを、無ければ名前の頭文字を表示する)。
+  // 一覧表・ランキングの表彰台など、複数の画面で使い回す。
+  function thumbHtml(inv, className) {
+    const cls = className || 'row-thumb';
+    if (inv.image) {
+      return `<img class="${cls}" src="${inv.image}" alt="">`;
+    }
+    const initial = escapeHtml((inv.name || '?').slice(0, 1));
+    return `<div class="${cls} row-thumb-placeholder">${initial}</div>`;
+  }
+
+  global.Utils = { uuid, debounce, escapeHtml, readFileAsDataUrl, downloadJson, formatDateTime, thumbHtml };
 })(window);

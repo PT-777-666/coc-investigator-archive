@@ -12,14 +12,6 @@
     render();
   }
 
-  function thumbHtml(inv) {
-    if (inv.image) {
-      return `<img class="row-thumb" src="${inv.image}" alt="">`;
-    }
-    const initial = Utils.escapeHtml((inv.name || '?').slice(0, 1));
-    return `<div class="row-thumb row-thumb-placeholder">${initial}</div>`;
-  }
-
   function render() {
     if (!rootEl) return;
     const state = Store.get();
@@ -35,7 +27,7 @@
 
     const rows = list.map((inv) => `
       <tr class="inv-row" data-id="${inv.id}">
-        <td>${thumbHtml(inv)}</td>
+        <td>${Utils.thumbHtml(inv)}</td>
         <td class="col-name">${Utils.escapeHtml(inv.name) || '(名前未設定)'}</td>
         <td>${Utils.escapeHtml(inv.occupation)}</td>
         <td>${Utils.escapeHtml(inv.system)}</td>
