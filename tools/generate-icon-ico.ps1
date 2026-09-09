@@ -39,9 +39,6 @@ $bookR = $size * 0.04
 $bookPath = New-RoundedRectPath -X $bookX -Y $bookY -W $bookW -H $bookH -R $bookR
 $g.DrawPath($pen, $bookPath)
 
-$spineX = $bookX + ($bookW / 2)
-$g.DrawLine($pen, $spineX, $bookY, $spineX, $bookY + $bookH)
-
 $ribbonPenWidth = [Math]::Max(2, [int]($size * 0.045))
 $ribbonPen = New-Object System.Drawing.Pen($accent, $ribbonPenWidth)
 $ribbonPen.StartCap = [System.Drawing.Drawing2D.LineCap]::Round

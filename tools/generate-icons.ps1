@@ -41,10 +41,6 @@ function New-Icon([int]$Size, [string]$Path) {
   $bookPath = New-RoundedRectPath -X $bookX -Y $bookY -W $bookW -H $bookH -R $bookR
   $g.DrawPath($pen, $bookPath)
 
-  # Spine crease down the middle (open-book look).
-  $spineX = $bookX + ($bookW / 2)
-  $g.DrawLine($pen, $spineX, $bookY, $spineX, $bookY + $bookH)
-
   # Bookmark ribbon hanging from the top edge.
   $ribbonPenWidth = [Math]::Max(2, [int]($Size * 0.045))
   $ribbonPen = New-Object System.Drawing.Pen($accent, $ribbonPenWidth)
