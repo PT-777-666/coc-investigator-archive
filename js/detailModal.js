@@ -240,9 +240,10 @@
     const inv = Store.get().investigators.find((x) => x.id === id);
     if (!inv) return;
     const panel = modalEl.querySelector('#detail-panel');
+    panel.classList.toggle('modal-panel-lost', inv.status === 'ロスト');
     panel.innerHTML = `
       <div class="modal-header">
-        <h2>${Utils.investigatorNameHtml(inv)}</h2>
+        <h2>${Utils.escapeHtml(inv.name) || '(名前未設定)'}</h2>
         <div class="modal-header-actions">
           <button type="button" class="btn-secondary" id="detail-edit-top">編集</button>
           <button type="button" class="btn-icon" id="detail-close">✕</button>

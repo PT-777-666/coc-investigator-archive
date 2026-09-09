@@ -3,7 +3,7 @@
  * 探索者データ自体はここでは扱わない(File System Access APIでローカルフォルダに
  * 直接保存されるため、Service Workerの範囲外)。
  */
-const CACHE_NAME = 'coc-investigator-archive-v59';
+const CACHE_NAME = 'coc-investigator-archive-v60';
 const PRECACHE_URLS = [
   './',
   './index.html',
